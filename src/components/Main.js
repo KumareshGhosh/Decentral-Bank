@@ -27,7 +27,15 @@ class Main extends Component {
           </tbody>
         </table>
         <div className="card mb-2" style={{ opacity: ".9" }}>
-          <form className="mb-3">
+          <form 
+              onSubmit={(event) => {
+              event.preventDefault();
+              let amount;
+              amount = this.input.value.toString();
+              amount = window.web3.utils.toWei(amount, "Ether");
+              this.props.stakeTokens(amount);
+            }}
+              className="mb-3">
             <div style={{ borderSpacing: "0 lem" }}>
               <label className="float-left" style={{ marginLeft: "15px" }}>
                 <b>Stake Tokens </b>{" "}
@@ -53,7 +61,11 @@ class Main extends Component {
               </button>
             </div>
           </form>
-          <button className="btn btn-primary btn-lg btn-block">WITHDRAW</button>
+          <button
+              onClick={(event) => {
+              event.preventDefault(this.props.unstakeTokens());
+            }}
+            className="btn btn-primary btn-lg btn-block">WITHDRAW</button>
           <div className="card-body text-center" style={{ color: "Blue" }}>
             AIRDROP
           </div>
